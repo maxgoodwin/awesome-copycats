@@ -449,19 +449,19 @@ globalkeys = mytable.join(
               {description = "-10%", group = "hotkeys"}),
 
     -- ALSA volume control
-    awful.key({ altkey }, "Up",
+    awful.key({ }, "XF86AudioRaiseVolume",
         function ()
             os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description = "volume up", group = "hotkeys"}),
-    awful.key({ altkey }, "Down",
+    awful.key({ }, "XF86AudioLowerVolume",
         function ()
             os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description = "volume down", group = "hotkeys"}),
-    awful.key({ altkey }, "m",
+    awful.key({ }, "XF86AudioMute",
         function ()
             os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
             beautiful.volume.update()
@@ -481,30 +481,30 @@ globalkeys = mytable.join(
         {description = "volume 0%", group = "hotkeys"}),
 
     -- MPD control
-    awful.key({ altkey, "Control" }, "Up",
+    awful.key({ }, "XF86AudioPlay",
         function ()
-            os.execute("mpc toggle")
+            os.execute("playerctl -p spotify,%any play-pause")
             beautiful.mpd.update()
         end,
-        {description = "mpc toggle", group = "widgets"}),
-    awful.key({ altkey, "Control" }, "Down",
+        {description = "play/pause audio", group = "hotkeys"}),
+    -- awful.key({ altkey, "Control" }, "Down",
+    --     function ()
+    --         os.execute("mpc stop")
+    --         beautiful.mpd.update()
+    --     end,
+    --     {description = "mpc stop", group = "hotkeys"}),
+    awful.key({ }, "XF86AudioPrev",
         function ()
-            os.execute("mpc stop")
+            os.execute("playerctl -p spotify,%any previous")
             beautiful.mpd.update()
         end,
-        {description = "mpc stop", group = "widgets"}),
-    awful.key({ altkey, "Control" }, "Left",
+        {description = "previous track", group = "hotkeys"}),
+    awful.key({ }, "XF86AudioNext",
         function ()
-            os.execute("mpc prev")
+            os.execute("playerctl -p spotify,%any next")
             beautiful.mpd.update()
         end,
-        {description = "mpc prev", group = "widgets"}),
-    awful.key({ altkey, "Control" }, "Right",
-        function ()
-            os.execute("mpc next")
-            beautiful.mpd.update()
-        end,
-        {description = "mpc next", group = "widgets"}),
+        {description = "next track", group = "hotkeys"}),
     awful.key({ altkey }, "0",
         function ()
             local common = { text = "MPD widget ", position = "top_middle", timeout = 2 }
